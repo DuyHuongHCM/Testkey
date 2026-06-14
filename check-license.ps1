@@ -21,7 +21,7 @@ function Get-WindowsLicenseStatus {
         return
     }
 
-    $slmgr = Join-Path $env:SystemRoot 'System32\\slmgr.vbs'
+    $slmgr = Join-Path $env:SystemRoot 'System32\slmgr.vbs'
     if (-not (Test-Path $slmgr)) {
         Write-Host "slmgr.vbs not found." -ForegroundColor Red
         return
@@ -36,12 +36,12 @@ function Get-OfficeScriptCandidates {
     $candidates = @()
 
     foreach ($root in $roots) {
-        $commonPath = Join-Path $root 'Microsoft Office\\Office16\\OSPP.VBS'
+        $commonPath = Join-Path $root 'Microsoft Office\Office16\OSPP.VBS'
         if (Test-Path $commonPath) {
             $candidates += $commonPath
         }
 
-        $commonPath15 = Join-Path $root 'Microsoft Office\\Office15\\OSPP.VBS'
+        $commonPath15 = Join-Path $root 'Microsoft Office\Office15\OSPP.VBS'
         if (Test-Path $commonPath15) {
             $candidates += $commonPath15
         }
