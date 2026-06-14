@@ -6,7 +6,7 @@
     Script thực hiện quét sâu thông tin hệ thống, kiểm tra Registry, tệp tin hệ thống,
     phân tích phương thức kích hoạt hệ điều hành và Office để đưa ra kết luận chi tiết.
 .AUTHOR
-    Thư ký AI của bạn
+    Phạm Đình Hổ
 #>
 
 # 1. TỰ ĐỘNG KIỂM TRA VÀ YÊU CẦU QUYỀN ADMINISTRATOR CHUẨN XÁC
@@ -529,3 +529,4 @@ try {
 Write-Host "`n[HOÀN THÀNH] Toàn bộ quy trình quét đã hoàn tất." -ForegroundColor Green
 Write-Host "Màn hình sẽ không tự tắt để anh/chị xem chi tiết kết quả quét bên trên." -ForegroundColor Gray
 Read-Host "Nhấn phím Enter để đóng cửa sổ này..."
+Exit
