@@ -4,7 +4,7 @@ Tool kiểm tra nhanh tình trạng bản quyền Windows và Office.
 
 ## Cách dùng
 
-Mở PowerShell (Run as Administrator nếu cần) và chạy:
+Mở PowerShell với quyền **Run as Administrator** và chạy:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\check-license.ps1

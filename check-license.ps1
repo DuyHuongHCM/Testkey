@@ -48,7 +48,7 @@ function Get-OfficeScriptCandidates {
             $candidates += $commonPath15
         }
 
-        if ((-not $candidates) -and (Test-Path $officeBase)) {
+        if (($candidates.Count -eq 0) -and (Test-Path $officeBase)) {
             $dynamic = Get-ChildItem -Path $officeBase -Filter OSPP.VBS -Recurse -ErrorAction SilentlyContinue |
                 Select-Object -ExpandProperty FullName
             if ($dynamic) {
