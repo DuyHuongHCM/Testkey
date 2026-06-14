@@ -36,19 +36,20 @@ function Get-OfficeScriptCandidates {
     $candidates = @()
 
     foreach ($root in $roots) {
-        $commonPath = Join-Path $root 'Microsoft Office\Office16\OSPP.VBS'
+        $officeBase = Join-Path $root 'Microsoft Office'
+
+        $commonPath = Join-Path $officeBase 'Office16\OSPP.VBS'
         if (Test-Path $commonPath) {
             $candidates += $commonPath
         }
 
-        $commonPath15 = Join-Path $root 'Microsoft Office\Office15\OSPP.VBS'
+        $commonPath15 = Join-Path $officeBase 'Office15\OSPP.VBS'
         if (Test-Path $commonPath15) {
             $candidates += $commonPath15
         }
 
-        $officeRoot = Join-Path $root 'Microsoft Office'
-        if (Test-Path $officeRoot) {
-            $dynamic = Get-ChildItem -Path $officeRoot -Filter OSPP.VBS -Recurse -ErrorAction SilentlyContinue |
+        if ((-not $candidates) -and (Test-Path $officeBase)) {
+            $dynamic = Get-ChildItem -Path $officeBase -Filter OSPP.VBS -Recurse -ErrorAction SilentlyContinue |
                 Select-Object -ExpandProperty FullName
             if ($dynamic) {
                 $candidates += $dynamic
