@@ -32,7 +32,10 @@ function Get-WindowsLicenseStatus {
 }
 
 function Get-OfficeScriptCandidates {
-    $roots = @($env:ProgramFiles, ${env:ProgramFiles(x86)}) | Where-Object { $_ }
+    $roots = @(
+        [Environment]::GetEnvironmentVariable('ProgramFiles'),
+        [Environment]::GetEnvironmentVariable('ProgramFiles(x86)')
+    ) | Where-Object { $_ }
     $candidates = @()
 
     foreach ($root in $roots) {
@@ -48,7 +51,11 @@ function Get-OfficeScriptCandidates {
             $candidates += $commonPath15
         }
 
-        if (($candidates.Count -eq 0) -and (Test-Path $officeBase)) {
+        if ($candidates.Count -gt 0) {
+            continue
+        }
+
+        if (Test-Path $officeBase) {
             $dynamic = Get-ChildItem -Path $officeBase -Filter OSPP.VBS -Recurse -ErrorAction SilentlyContinue |
                 Select-Object -ExpandProperty FullName
             if ($dynamic) {
@@ -57,7 +64,7 @@ function Get-OfficeScriptCandidates {
         }
     }
 
-    return $candidates | Sort-Object -Unique
+    return $candidates | Sort-Object { $_.ToLowerInvariant() } -Unique
 }
 
 function Get-OfficeLicenseStatus {
